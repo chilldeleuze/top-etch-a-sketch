@@ -2,16 +2,17 @@
 
 const canvas = document.getElementById("canvas");
 const canvasWidth = canvas.getBoundingClientRect().width;
-const button = document.getElementById("gridsize-button")
+const paintModeButton = document.getElementById("paintmode-button")
+const gridsizeButton = document.getElementById("gridsize-button")
 let pixelNumber = 16;
-let paintMode = "default"; 
+let paintMode = "color"; 
 let color = "black";
 
 
 console.log(canvasWidth);
 console.log("hello")
 
-button.addEventListener("click", () => {
+gridsizeButton.addEventListener("click", () => {
     console.log("click");
     let i = 0;
     while (i < 3) {
@@ -29,6 +30,14 @@ button.addEventListener("click", () => {
 
 })
 
+paintModeButton.addEventListener("click", () => {
+    paintMode = "rainbow";
+})
+
+function getRandomColor() {
+    return "#" + ((1 << 24) * Math.random() | 0).toString(16).padStart(6, "0")
+}
+
 function clearGrid() {
     canvas.replaceChildren();
 }
@@ -45,10 +54,16 @@ function createGrid(pixelNumber) {
     }
 }
 
+
+
 createGrid(16)
 
 canvas.addEventListener("mouseover", (e) => {
     let target = e.target;
-    target.style.backgroundColor = color;
+    if (paintMode ===  "color") {
+        target.style.backgroundColor = color;
+    } else if (paintMode ===  "rainbow") {
+        target.style.backgroundColor = getRandomColor();
+    }
 })
 
