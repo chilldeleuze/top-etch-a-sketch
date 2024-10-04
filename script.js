@@ -2,15 +2,28 @@
 
 const canvas = document.getElementById("canvas");
 const canvasWidth = canvas.getBoundingClientRect().width;
-const paintModeButton = document.getElementById("paintmode-button")
-const gridsizeButton = document.getElementById("gridsize-button")
+const paintModeButtons = document.querySelector("div.paintmode-selection");
+const gridsizeButton = document.getElementById("gridsize-button");
 let pixelNumber = 16;
 let paintMode = "color"; 
 let color = "black";
 
 
 console.log(canvasWidth);
-console.log("hello")
+console.log("hello");
+
+
+paintModeButtons.addEventListener("click", (e) => {
+    if (e.target.name === "paintmode") {
+        if (e.target.value === "rainbow") {
+            paintMode = "rainbow";
+            console.log("rainbow")
+        } else if (e.target.value === "color") {
+            paintMode = "color";
+            console.log("colormode")
+        }
+    }
+})
 
 gridsizeButton.addEventListener("click", () => {
     console.log("click");
@@ -27,12 +40,9 @@ gridsizeButton.addEventListener("click", () => {
     console.log("pixelnumer:" + pixelNumber)
     clearGrid();
     createGrid(pixelNumber);
-
 })
 
-paintModeButton.addEventListener("click", () => {
-    paintMode = "rainbow";
-})
+
 
 function getRandomColor() {
     return "#" + ((1 << 24) * Math.random() | 0).toString(16).padStart(6, "0")
