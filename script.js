@@ -2,8 +2,11 @@
 
 const canvas = document.getElementById("canvas");
 const canvasWidth = canvas.getBoundingClientRect().width;
-let pixelNumber = 16;
 const button = document.getElementById("gridsize-button")
+let pixelNumber = 16;
+let paintMode = "default"; 
+let color = "black";
+
 
 console.log(canvasWidth);
 console.log("hello")
@@ -46,6 +49,6 @@ createGrid(16)
 
 canvas.addEventListener("mouseover", (e) => {
     let target = e.target;
-    target.style.backgroundColor = "black";
+    target.style.backgroundColor = color;
 })
 
